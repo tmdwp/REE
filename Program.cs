@@ -14,45 +14,6 @@
 
                 string Job { get; }
             }
-            static void Main(string[] args)
-            {
-                Console.WriteLine("당신의 이름을 입력해 주세요.");
-                string playerName = Console.ReadLine(); // 이름 짓기
-
-                while (true)
-                {
-                    Console.WriteLine("스파르타 마을에 오신 것을 환영합니다.");
-                    Console.WriteLine("이곳에서 던전으로 들어가기 전 활동을 할 수 있습니다.");
-                    Console.WriteLine("1.상태 보기");
-                    Console.WriteLine("2.인벤토리");
-                    Console.WriteLine("3.상점\n");
-                    Console.WriteLine("원하는 행동을 선택해주세요.(1~3)");
-                    int Move;
-                    while (!int.TryParse(Console.ReadLine(), out Move))
-                    {
-                        Console.WriteLine("잘못된 입력입니다.");
-                    }
-                    switch (move)
-                    {
-                        case 1:
-                            Console.Clear();
-                            player.StatusOpen();
-                            break;
-                        case 2:
-                            Console.Clear();
-                            player.OpenInventory();
-                            break;
-                        case 3:
-                            Console.Clear();
-                            shop.ShopMenu(player);
-                            break;
-                        default:
-                            Console.WriteLine("잘못된 입력입니다.");
-                            return;
-                    }
-                }
-            }
-
             public class Player : ICharacter
             {
                 public int Level { get; set; }
@@ -79,7 +40,7 @@
                     Health = 100;
                     Gold = 1500;
                 }
-
+                
                 public void StatusOpen()
                 {
                     int select;
@@ -116,7 +77,6 @@
                     } while ((!int.TryParse(Console.ReadLine(), out select)) || select != 0);
                     
                 }
-
                 public void OpenInventory()
                 {
                     int input = -1;
@@ -167,9 +127,8 @@
                               Console.WriteLine("잘못된 입력입니다!!! 마을로 귀환합니다.");
                           }
                       }
-
                       input = -1;
-                    } 
+                    }while (input != 0);
                 }
             }
             
@@ -447,8 +406,61 @@
                     }
                 }
             }
-            
+            internal class RPG
+            {
+                static void Main(string[] args)
+                {
+                    Console.WriteLine("당신의 이름은 뭔가요?");
+                    string name = Console.ReadLine();
+                    Player player = new Player(name);
+                    MyItem item = new MyItem("나무 막대",1,1,"연습용 막대기이다.")
+                    player.Inventory.Add(player.Inventory.Count,item);
+                    Town town = new Town();
+                    Shop shop = new Shop();
+                    shop.SettingShop();
+                    town.Start(player, shop);
+                }
+            }
         } 
     }
     
+}
+
+static void Main(string[] args)
+{
+    Console.WriteLine("당신의 이름을 입력해 주세요.");
+    string playerName = Console.ReadLine(); // 이름 짓기
+
+    while (true)
+    {
+        Console.WriteLine("스파르타 마을에 오신 것을 환영합니다.");
+        Console.WriteLine("이곳에서 던전으로 들어가기 전 활동을 할 수 있습니다.");
+        Console.WriteLine("1.상태 보기");
+        Console.WriteLine("2.인벤토리");
+        Console.WriteLine("3.상점\n");
+        Console.WriteLine("원하는 행동을 선택해주세요.(1~3)");
+        int Move;
+        while (!int.TryParse(Console.ReadLine(), out Move))
+        {
+            Console.WriteLine("잘못된 입력입니다.");
+        }
+        switch (move)
+        {
+            case 1:
+                Console.Clear();
+                player.StatusOpen();
+                break;
+            case 2:
+                Console.Clear();
+                player.OpenInventory();
+                break;
+            case 3:
+                Console.Clear();
+                shop.ShopMenu(player);
+                break;
+            default:
+                Console.WriteLine("잘못된 입력입니다.");
+                return;
+        }
+    }
 }
