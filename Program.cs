@@ -38,7 +38,7 @@ namespace Ree
             public int EquipAttack = 0;
             public int EquipDefense = 0;
 
-            public player(string name)
+            public Player(string name)
             {
                 //Hp, 공격력, 방어력, 레벨, 골드, 이름이 들어가야 함
                 Level = 1;
@@ -186,7 +186,7 @@ namespace Ree
             {
                 switch (Category)
                 {
-                    case (int)ItemCategory.Weapon ;
+                    case (int)ItemCategory.Weapon:
                         if (IsEquip == false)
                         {
                             player.Attack += Stat;
@@ -201,7 +201,7 @@ namespace Ree
                         }
 
                         break;
-                    case (int)ItemCategory.chaos ;
+                    case (int)ItemCategory.chaos:
                         if (IsEquip == false)
                         {
                             player.Attack = new Random().Next(-100, 100);
@@ -295,7 +295,7 @@ namespace Ree
 
             }
 
-            public void Setting Shop()
+            public void SettingShop()
             {
                 shopList.Add(new ShopItem("수련 갑옷", (int)ItemCategory.Armor, 5, "수련자용 갑옷이다.", 500));
                 shopList.Add(new ShopItem("무쇠 갑옷", (int)ItemCategory.Armor, 9, "무쇠로 만든 갑옷이다.", 1000));
@@ -435,7 +435,7 @@ namespace Ree
                     Console.WriteLine("당신의 이름은 뭔가요?");
                     string name = Console.ReadLine();
                     Player player = new Player(name);
-                    MyItem item = new MyItem("나무 막대", 1, 1, "연습용 막대기이다.")
+                    MyItem item = new MyItem("나무 막대", 1, 1, "연습용 막대기이다.");
                     player.Inventory.Add(player.Inventory.Count, item);
                     Town town = new Town();
                     Shop shop = new Shop();
